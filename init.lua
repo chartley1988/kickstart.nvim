@@ -51,7 +51,7 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
-  
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -64,7 +64,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -89,7 +89,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -167,7 +167,9 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    "catppuccin/nvim", name = "catppuccin", priority = 1000;
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     config = function()
       vim.cmd.colorscheme 'catppuccin-mocha'
     end,
@@ -229,10 +231,15 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -298,7 +305,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
@@ -664,6 +670,15 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+-- NVIM Tree Shortcuts
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>f", ":NvimTreeFocus<cr>")
+
+-- Window Switch Keymaps
+vim.keymap.set("n", "<leader>j", "<C-w>w")
+
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
